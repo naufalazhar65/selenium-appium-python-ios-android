@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
 from time import sleep
 
 @pytest.fixture
@@ -11,7 +12,7 @@ def browser():
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     
     driver = webdriver.Chrome("/Users/naufalazhar/Documents/ChromeDriver/chromedriver", options=options)
     driver.maximize_window()
@@ -75,6 +76,52 @@ def test_logout(browser):
     sleep(2)
     assert "Swag Labs" in browser.title
     assert "Username" in browser.find_element(by=By.ID, value='user-name').get_attribute("placeholder")
+
+# ==================================================================================================
+
+def test_product_sort(browser):
+    browser.get('https://www.saucedemo.com/')
+    assert 'Swag Labs' in browser.title
+
+    username = browser.find_element(by=By.ID, value='user-name')
+    password = browser.find_element(by=By.ID, value='password')
+    login_button = browser.find_element(by=By.ID, value='login-button')
+    username.send_keys("standard_user")
+    password.send_keys("secret_sauce")
+    login_button.click()
+
+    sort_button = browser.find_element(by=By.CLASS_NAME, value='product_sort_container')
+    sort_button.click()
+    sort_name = browser.find_element(by=By.XPATH, value="//option[@value='za']")
+    sort_name.click()
+    product_names = browser.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
+    assert product_names[0].text == 'Test.allTheThings() T-Shirt (Red)'
+    assert product_names[-1].text == 'Sauce Labs Backpack'
+    sleep(2)
+    sort_button = browser.find_element(by=By.CLASS_NAME, value='product_sort_container')
+    sort_button.click()
+    sort_name = browser.find_element(by=By.XPATH, value="//option[@value='lohi']")
+    sort_name.click()
+    product_names = browser.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
+    assert product_names[0].text == 'Sauce Labs Onesie'
+    assert product_names[-1].text == 'Sauce Labs Fleece Jacket'
+    sleep(2)
+    sort_button = browser.find_element(by=By.CLASS_NAME, value='product_sort_container')
+    sort_button.click()
+    sort_name = browser.find_element(by=By.XPATH, value="//option[@value='hilo']")
+    sort_name.click()
+    product_names = browser.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
+    assert product_names[0].text == 'Sauce Labs Fleece Jacket'
+    assert product_names[-1].text == 'Sauce Labs Onesie'
+    sleep(2)
+    sort_button = browser.find_element(by=By.CLASS_NAME, value='product_sort_container')
+    sort_button.click()
+    sort_name = browser.find_element(by=By.XPATH, value="//option[@value='az']")
+    sort_name.click()
+    product_names = browser.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
+    assert product_names[0].text == 'Sauce Labs Backpack'
+    assert product_names[-1].text == 'Test.allTheThings() T-Shirt (Red)'
+    sleep(2)
 
 # ==================================================================================================
 
