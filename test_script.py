@@ -78,6 +78,44 @@ def test_logout(browser):
 
 # ==================================================================================================
 
+def test_add_remove_item_from_cart(browser):
+    browser.get('https://www.saucedemo.com/')
+    assert 'Swag Labs' in browser.title
+
+    username = browser.find_element(by=By.ID, value='user-name')
+    password = browser.find_element(by=By.ID, value='password')
+    login_button = browser.find_element(by=By.ID, value='login-button')
+    username.send_keys("standard_user")
+    password.send_keys("secret_sauce")
+    login_button.click()
+    sleep(2)
+
+    assert "Products" in browser.page_source and "Swag Labs" in browser.page_source
+    assert browser.current_url == 'https://www.saucedemo.com/inventory.html'
+
+     # Add product to cart
+    product_name = browser.find_element(by=By.ID, value="add-to-cart-sauce-labs-backpack")
+    product_name.click()
+    sleep(2)
+    
+    # Verify that the product is added to the cart
+    assert "1" in browser.find_element(by=By.CLASS_NAME, value='shopping_cart_badge').get_attribute('innerHTML')
+    assert "Remove" in browser.find_element(by=By.ID, value="remove-sauce-labs-backpack").get_attribute('innerHTML')
+
+    # Remove product from cart
+    cart_button = browser.find_element(by=By.XPATH, value='//*[@id="shopping_cart_container"]/a')
+    cart_button.click()
+    sleep(2)
+    remove_button = browser.find_element(by=By.ID, value="remove-sauce-labs-backpack")
+    remove_button.click()
+
+    # Verify that the product is removed from the cart
+    assert "" in browser.find_element(by=By.CLASS_NAME, value='shopping_cart_link').get_attribute('innerHTML')
+    elements = browser.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
+    assert len(elements) == 0
+
+# ==================================================================================================
+
 def test_product_sort(browser):
     browser.get('https://www.saucedemo.com/')
     assert 'Swag Labs' in browser.title
