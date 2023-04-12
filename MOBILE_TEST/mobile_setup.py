@@ -1,6 +1,5 @@
 import pytest
 from appium import webdriver
-from appium.webdriver.common.appiumby import AppiumBy
 import ios_test as ios
 import android_test as android
 
@@ -16,7 +15,7 @@ platform = "ios"
 # Set capabilities for Android
 if platform.lower() == "android":
     caps = {
-        "deviceName": "Gphone",
+        "deviceName": "Google Pixel 4",
         "udid": "emulator-5554",
         "noReset": False,
         "platformName": "Android",

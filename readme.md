@@ -4,3 +4,6 @@
 - pytest test_script.py -v -s
 - pytest test_script.py -v --html=report.html
 - pytest -p no:warnings -s -v test_script.py
+- pytest -p no:warnings -s -v ./MOBILE_TEST/mobile_setup.py
+
+<img width="939" alt="Screenshot 2023-04-12 at 17 04 38" src="./assets/test.png">

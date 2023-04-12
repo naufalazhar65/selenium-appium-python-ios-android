@@ -2,7 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from time import sleep
 
 def test_login(driver):
-    print("======== Login =========")
+    print("======== Login Functionality =========")
     el1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="tab bar option menu")
     el1.click()
     el2 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="menu item log in")
@@ -21,7 +21,7 @@ def test_login(driver):
 
 
 def test_sort_button(driver):
-    print("======== Sort Button =========")
+    print("======== Sort By Button Functionality =========")
     el1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="sort button")
     el1.click()
     el2 = driver.find_element(by=AppiumBy.XPATH, value="//XCUIElementTypeStaticText[@name=\"Name - Descending\"]")
@@ -41,7 +41,7 @@ def test_sort_button(driver):
     sleep(2)
 
 def test_Add_to_cart(driver):
-    print("======== Add To cart =========")
+    print("======== Add To Cart Functionality =========")
     assert driver.find_element(by=AppiumBy.XPATH, value='//XCUIElementTypeStaticText[@name="Products"]').is_displayed()
     el1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Sauce Labs Bike Light")
     el1.click()
@@ -54,7 +54,7 @@ def test_Add_to_cart(driver):
 
 
 def test_checkout(driver):
-    print("========= Checkout =========")
+    print("========= Checkout Functionality =========")
     el1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="tab bar option cart")
     el1.click()
     assert driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="My Cart").is_displayed()

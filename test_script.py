@@ -50,7 +50,6 @@ def test_invalid_login(browser):
     password.send_keys("invalid_password")
     login_button.click()
     sleep(2)
-
     assert browser.find_element(by=By.CSS_SELECTOR, value='.error-button').is_displayed()
     assert "Epic sadface: Username and password do not match any user in this service" in browser.page_source
 
@@ -150,7 +149,6 @@ def test_checkout(browser):
     cart_button = browser.find_element(by=By.CSS_SELECTOR, value='.shopping_cart_badge')
     cart_button.click()
     sleep(2)
-
     assert "Your Cart" in browser.page_source
     assert "$9.99" in browser.find_element(by=By.CLASS_NAME, value="inventory_item_price").text
 
@@ -162,7 +160,6 @@ def test_checkout(browser):
     # Fill in checkout form
     assert "Checkout: Your Information" in browser.page_source
     assert browser.find_element(by=By.CLASS_NAME, value="checkout_info").is_displayed()
-
     firstname = browser.find_element(by=By.ID, value='first-name')
     lastname = browser.find_element(by=By.ID, value='last-name')
     postalcode = browser.find_element(by=By.ID, value='postal-code')
@@ -175,7 +172,6 @@ def test_checkout(browser):
     # Ensure the purchase is successful
     assert "Checkout: Overview" in browser.page_source
     assert "Payment Information" in browser.find_element(by=By.CLASS_NAME, value="summary_info_label").text
-
     confirm_purchase_button = browser.find_element(by=By.ID, value='finish')
     confirm_purchase_button.click()
 
