@@ -12,7 +12,7 @@ def teardown_method():
 # Choose platform for test, android or ios
 platform = "ios"
 
-# Set capabilities for Android
+# Set capabilities for Android or iOS
 if platform.lower() == "android":
     caps = {
         "deviceName": "Google Pixel 4",
@@ -20,12 +20,9 @@ if platform.lower() == "android":
         "noReset": False,
         "platformName": "Android",
         "platformVersion": "12",    
-        # "app": "/Users/naufalazhar/Documents/Demo App/MyRNDemoApp.apk",
         "appPackage": "com.saucelabs.mydemoapp.rn",
         "appActivity": "com.saucelabs.mydemoapp.rn.MainActivity",
     }
-
-# Set capabilities for iOS
 elif platform.lower() == "ios":
     caps = {
         "platformName": "iOS",
@@ -34,24 +31,31 @@ elif platform.lower() == "ios":
         "udid": "5D083F20-766C-45E3-9FBF-C65BBCC779E7",
         "noReset": False,
         "app": "/Users/naufalazhar/Documents/Demo App/MyRNDemoApp.app",
-        # "browserName": "Safari"
     }
+else:
+    raise ValueError("Unsupported platforms")
 
 driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
 
-def test_main():
-        if platform.lower() == "android":
-            test_cases = [android.test_Add_to_cart,
-                            android.test_checkout]
-            for test_case in test_cases:
-                test_case(driver)
+# Run test cases based on platform
+def run_test_cases(test_cases):
+    for test_case in test_cases:
+        test_case(driver)
 
-        elif platform.lower() == "ios":
-            test_cases = [ios.test_login,
-                            ios.test_sort_button,
-                            ios.test_Add_to_cart,
-                            ios.test_checkout]
-            for test_case in test_cases:
-                test_case(driver)
-        else:
-            raise ValueError("Unsupported platforms")
+def test_main():
+    # Run Android tests
+    if platform.lower() == "android":
+        test_cases = [android.test_Add_to_cart, android.test_checkout]
+        run_test_cases(test_cases)
+        print("Android tests passed successfully!")
+
+
+    # Run iOS tests
+    elif platform.lower() == "ios":
+        test_cases = [ios.test_login, ios.test_sort_button, ios.test_Add_to_cart, ios.test_checkout]
+        run_test_cases(test_cases)
+        print("iOS tests passed successfully!")
+
+    # Unsupported platforms
+    else:
+        raise ValueError("Unsupported platforms")
