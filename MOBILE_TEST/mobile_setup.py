@@ -48,6 +48,7 @@ def test_main():
         print("----- Android tests started! -----")
         test_cases = [android.test_Add_to_cart,
                     android.test_checkout]
+        
         run_test_cases(test_cases)
         print("----- Android tests passed successfully! -----")
 
@@ -59,9 +60,11 @@ def test_main():
                     ios.test_sort_button,
                     ios.test_Add_to_cart,
                     ios.test_checkout]
+        
         run_test_cases(test_cases)
         print("----- iOS tests passed successfully! -----")
 
     # Unsupported platforms
     else:
         raise ValueError("Unsupported platforms")
+    
