@@ -10,10 +10,11 @@
 
 - Overall, this code sets up the necessary configurations to test a mobile application on either Android or iOS platform and performs automated testing using Pytest.
 
-# RUN
-- pytest test_script.py -v -s
-- pytest test_script.py -v --html=report.html
-- pytest -p no:warnings -s -v test_script.py
-- pytest -p no:warnings -s -v ./MOBILE_TEST/mobile_setup.py
+## RUN
+```
+pytest -s     = run with debug
+pytest -v     = run all test with desc
+pytest        = run all test
+```
 
 <img width="939" alt="Screenshot 2023-04-12 at 17 04 38" src="./assets/tests.png">
