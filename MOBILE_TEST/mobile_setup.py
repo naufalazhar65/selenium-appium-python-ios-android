@@ -47,7 +47,8 @@ def test_main():
     if platform.lower() == "android":
         print("----- Running Android tests -----")
         test_cases = [android.test_Add_to_cart,
-                    android.test_checkout]
+                    android.test_checkout
+                    ]
         
         run_test_cases(test_cases)
         print("----- Android tests passed successfully! -----")
@@ -58,8 +59,10 @@ def test_main():
         print("----- Running iOS tests -----")
         test_cases = [ios.test_login,
                     ios.test_sort_button,
-                    ios.test_Add_to_cart,
-                    ios.test_checkout]
+                    ios.test_add_to_cart,
+                    ios.test_checkout 
+                    # ios.test_invalid_checkout
+                    ]
         
         run_test_cases(test_cases)
         print("----- iOS tests passed successfully! -----")
