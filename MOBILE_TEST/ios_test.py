@@ -18,6 +18,7 @@ def test_login(driver):
     el7.click()
     assert driver.find_element(by=AppiumBy.XPATH, value='//XCUIElementTypeStaticText[@name="Products"]').is_displayed()
 
+# ======================================================================================================================================
 
 def test_sort_button(driver):
     print("======== Sort By Button Functionality =========")
@@ -63,7 +64,7 @@ def test_sort_button(driver):
     assert el8[0].text == 'Sauce Labs Backpack'
     sleep(2)
 
-    
+# ======================================================================================================================================
 
 def test_add_to_cart(driver):
     print("======== Add To Cart Functionality =========")
@@ -84,7 +85,7 @@ def test_add_to_cart(driver):
     assert driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=product_name).is_displayed()
     sleep(2)
 
-
+# ======================================================================================================================================
 
 def test_checkout(driver):
     print("========= Checkout Functionality =========")
@@ -158,9 +159,11 @@ def test_checkout(driver):
     assert el26[0].text == 'Thank you for your order'
     sleep(2)
 
+# ======================================================================================================================================
 
 def test_invalid_checkout(driver):
     print("========= Invalid Checkout Functionality =========")
+
     el1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="tab bar option cart")
     el1.click()
     assert driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="My Cart").is_displayed()
