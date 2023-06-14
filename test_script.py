@@ -14,12 +14,11 @@ def browser():
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('--headless')
     
-    service = Service("/Users/naufalazhar/Documents/ChromeDriver/chromedriver")
-    driver = webdriver.Chrome(service=service, options=options)
-    driver.maximize_window()
-    driver.implicitly_wait(15)
-    yield driver
-    driver.quit()
+    browser = webdriver.Chrome(options=options)
+    browser.maximize_window()
+    browser.implicitly_wait(15)
+    yield browser
+    browser.quit()
 
 # ==================================================================================================
 
